@@ -12,7 +12,7 @@ class Test
 
             ~Test()
             {
-                  //cout << " Calling Destructor " << endl;
+                  cout << " Calling Destructor for : " << name << endl;
             }
 
             void print()
@@ -29,13 +29,41 @@ int main()
       testStack.push(Test("John"));
       testStack.push(Test("Sue"));
 
-      Test test1 = testStack.top();
-      test1.print();
-
+      /*
+      * This is invalid code. Object is destroyed
+      Test &test1 = testStack.top();
       testStack.pop();
+      test1.print();
+      */
 
-      Test test2 = testStack.top();
-      test2.print();
+      while (testStack.size())
+      {
+            Test &test = testStack.top();
+            test.print();
+            testStack.pop();
+      }
 
+      // FIFO
+      queue<Test> testQueue;
+
+      testQueue.push(Test("Mike"));
+      testQueue.push(Test("John"));
+      testQueue.push(Test("Sue"));
+
+      /*
+      * This is invalid code. Object is destroyed
+      Test &test1 = testStack.top();
+      testStack.pop();
+      test1.print();
+      */
+
+      testQueue.back().print();
+
+      while (testQueue.size())
+      {
+            Test &test = testQueue.front();
+            test.print();
+            testQueue.pop();
+      }
       return 0;
 }
