@@ -63,15 +63,14 @@ class ring<T>::iterator
                   std::cout << "Iterator printed " << T() << std::endl;
             }
 
-            iterator &operator++(int)
-            {
-                  m_pos++;
-                  return *this;
+            const iterator operator++(int) {
+                  ring<T>::iterator temp(*this);
+                  ++m_pos;
+                  return temp;
             }
 
-            iterator &operator++()
-            {
-                  m_pos++;
+            const iterator &operator++() {
+                  ++m_pos;
                   return *this;
             }
 
